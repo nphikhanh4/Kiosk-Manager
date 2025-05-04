@@ -1,0 +1,26 @@
+﻿@model IEnumerable<KioskManagementWebApp.Models.Tuition>
+<h2>Quản lý Học phí</h2>
+<a asp-action="Create" class="btn btn-primary">Thêm Học phí</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã sinh viên</th>
+            <th>Tên sinh viên</th>
+            <th>Số tiền</th>
+            <th>Hạn nộp</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tuition in Model)
+        {
+            <tr>
+                <td>@tuition.StudentId</td>
+                <td>@tuition.StudentName</td>
+                <td>@tuition.Amount</td>
+                <td>@tuition.DueDate.ToShortDateString()</td>
+                <td>@(tuition.IsPaid ? "Đã thanh toán" : "Chưa thanh toán")</td>
+            </tr>
+        }
+    </tbody>
+</table>
