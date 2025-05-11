@@ -6,6 +6,7 @@ D:\UML\KioskManagementWebApp\obj\Debug\net9.0\KioskManagementWebApp.csproj.CoreC
 D:\UML\KioskManagementWebApp\obj\Debug\net9.0\KioskManagementWebApp.MvcApplicationPartsAssemblyInfo.cache
 D:\UML\KioskManagementWebApp\obj\Debug\net9.0\KioskManagementWebApp.RazorAssemblyInfo.cache
 D:\UML\KioskManagementWebApp\obj\Debug\net9.0\KioskManagementWebApp.RazorAssemblyInfo.cs
+D:\UML\KioskManagementWebApp\obj\Debug\net9.0\KioskManagementWebApp.sourcelink.json
 D:\UML\KioskManagementWebApp\bin\Debug\net9.0\appsettings.Development.json
 D:\UML\KioskManagementWebApp\bin\Debug\net9.0\appsettings.json
 D:\UML\KioskManagementWebApp\bin\Debug\net9.0\KioskManagementWebApp.staticwebassets.runtime.json
@@ -148,3 +149,4 @@ D:\UML\KioskManagementWebApp\obj\Debug\net9.0\refint\KioskManagementWebApp.dll
 D:\UML\KioskManagementWebApp\obj\Debug\net9.0\KioskManagementWebApp.pdb
 D:\UML\KioskManagementWebApp\obj\Debug\net9.0\KioskManagementWebApp.genruntimeconfig.cache
 D:\UML\KioskManagementWebApp\obj\Debug\net9.0\ref\KioskManagementWebApp.dll
+D:\UML\KioskManagementWebApp\obj\Debug\net9.0\compressed\zshk9kcapb-d37maupbmx.gz

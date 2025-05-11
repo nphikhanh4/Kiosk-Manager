@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IRnHqE0B+9RJVjgC74IkDOPplzZ2XVzu7PBIhryy6+E=",
+  "Hash": "uzSDbQjr5iAlHy2aEt+u7l+G2y+E834jqQE0HSbIgRI=",
   "Source": "KioskManagementWebApp",
   "BasePath": "_content/KioskManagementWebApp",
   "Mode": "Default",
@@ -1319,6 +1319,27 @@
       "OriginalItemSpec": "D:\\UML\\KioskManagementWebApp\\wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
+      "Identity": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\compressed\\zshk9kcapb-d37maupbmx.gz",
+      "SourceId": "KioskManagementWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/KioskManagementWebApp",
+      "RelativePath": "css/Kiosk#[.{fingerprint=d37maupbmx}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "D:\\UML\\KioskManagementWebApp\\wwwroot\\css\\Kiosk.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "ogkri2olr8",
+      "Integrity": "WPoVrl1Sp2c8UHPs8fKUJH+ysjf10TmXPbTDGveXsHM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\UML\\KioskManagementWebApp\\wwwroot\\css\\Kiosk.css"
+    },
+    {
       "Identity": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\compressed\\zyffue9iku-cosvhxvwiu.gz",
       "SourceId": "KioskManagementWebApp",
       "SourceType": "Discovered",
@@ -1401,6 +1422,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\KioskManagementWebApp.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\UML\\KioskManagementWebApp\\wwwroot\\css\\Kiosk.css",
+      "SourceId": "KioskManagementWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\UML\\KioskManagementWebApp\\wwwroot\\",
+      "BasePath": "_content/KioskManagementWebApp",
+      "RelativePath": "css/Kiosk#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "d37maupbmx",
+      "Integrity": "aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Kiosk.css"
     },
     {
       "Identity": "D:\\UML\\KioskManagementWebApp\\wwwroot\\css\\site.css",
@@ -2728,6 +2770,304 @@
   ],
   "Endpoints": [
     {
+      "Route": "css/Kiosk.css",
+      "AssetFile": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\compressed\\zshk9kcapb-d37maupbmx.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001059322034"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "943"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WPoVrl1Sp2c8UHPs8fKUJH+ysjf10TmXPbTDGveXsHM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 06 May 2025 17:25:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528="
+        }
+      ]
+    },
+    {
+      "Route": "css/Kiosk.css",
+      "AssetFile": "D:\\UML\\KioskManagementWebApp\\wwwroot\\css\\Kiosk.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2670"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 06 May 2025 17:25:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528="
+        }
+      ]
+    },
+    {
+      "Route": "css/Kiosk.css.gz",
+      "AssetFile": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\compressed\\zshk9kcapb-d37maupbmx.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "943"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WPoVrl1Sp2c8UHPs8fKUJH+ysjf10TmXPbTDGveXsHM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 06 May 2025 17:25:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WPoVrl1Sp2c8UHPs8fKUJH+ysjf10TmXPbTDGveXsHM="
+        }
+      ]
+    },
+    {
+      "Route": "css/Kiosk.d37maupbmx.css",
+      "AssetFile": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\compressed\\zshk9kcapb-d37maupbmx.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001059322034"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "943"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WPoVrl1Sp2c8UHPs8fKUJH+ysjf10TmXPbTDGveXsHM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 06 May 2025 17:25:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d37maupbmx"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Kiosk.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528="
+        }
+      ]
+    },
+    {
+      "Route": "css/Kiosk.d37maupbmx.css",
+      "AssetFile": "D:\\UML\\KioskManagementWebApp\\wwwroot\\css\\Kiosk.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2670"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 06 May 2025 17:25:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d37maupbmx"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Kiosk.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528="
+        }
+      ]
+    },
+    {
+      "Route": "css/Kiosk.d37maupbmx.css.gz",
+      "AssetFile": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\compressed\\zshk9kcapb-d37maupbmx.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "943"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WPoVrl1Sp2c8UHPs8fKUJH+ysjf10TmXPbTDGveXsHM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 06 May 2025 17:25:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d37maupbmx"
+        },
+        {
+          "Name": "label",
+          "Value": "css/Kiosk.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WPoVrl1Sp2c8UHPs8fKUJH+ysjf10TmXPbTDGveXsHM="
+        }
+      ]
+    },
+    {
       "Route": "css/site.b9sayid5wm.css",
       "AssetFile": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\compressed\\on5xg0lxge-b9sayid5wm.gz",
       "Selectors": [
@@ -3646,7 +3986,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3707,7 +4047,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3752,7 +4092,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3807,7 +4147,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3868,7 +4208,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3913,7 +4253,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3968,7 +4308,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4021,7 +4361,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4058,7 +4398,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4105,7 +4445,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4158,7 +4498,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4195,7 +4535,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 16:05:58 GMT"
+          "Value": "Thu, 08 May 2025 16:52:39 GMT"
         },
         {
           "Name": "Cache-Control",

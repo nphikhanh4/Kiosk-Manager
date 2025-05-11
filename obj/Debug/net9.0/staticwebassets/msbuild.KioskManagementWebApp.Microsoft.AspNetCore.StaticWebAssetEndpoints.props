@@ -1,5 +1,17 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/KioskManagementWebApp/css/Kiosk.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Kiosk.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2670"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528=\u0022"},{"Name":"Last-Modified","Value":"Tue, 06 May 2025 17:25:29 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/KioskManagementWebApp/css/Kiosk.d37maupbmx.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Kiosk.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"d37maupbmx"},{"Name":"integrity","Value":"sha256-aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528="},{"Name":"label","Value":"_content/KioskManagementWebApp/css/Kiosk.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2670"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022aZ9OEF03U1hQyW7FtiiREzgKwZrL9UmJ4ZwGSSCj528=\u0022"},{"Name":"Last-Modified","Value":"Tue, 06 May 2025 17:25:29 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/KioskManagementWebApp/css/site.b9sayid5wm.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
@@ -40,13 +52,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\KioskManagementWebApp.6vxcdawrdi.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"6vxcdawrdi"},{"Name":"integrity","Value":"sha256-jnTX9snOoyX6kaDrtKd\u002B8sRqkpP34gs90DbsjdqG17k="},{"Name":"label","Value":"_content/KioskManagementWebApp/KioskManagementWebApp.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022jnTX9snOoyX6kaDrtKd\u002B8sRqkpP34gs90DbsjdqG17k=\u0022"},{"Name":"Last-Modified","Value":"Sun, 04 May 2025 16:05:58 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022jnTX9snOoyX6kaDrtKd\u002B8sRqkpP34gs90DbsjdqG17k=\u0022"},{"Name":"Last-Modified","Value":"Thu, 08 May 2025 16:52:39 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/KioskManagementWebApp/KioskManagementWebApp.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\KioskManagementWebApp.6vxcdawrdi.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-jnTX9snOoyX6kaDrtKd\u002B8sRqkpP34gs90DbsjdqG17k="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022jnTX9snOoyX6kaDrtKd\u002B8sRqkpP34gs90DbsjdqG17k=\u0022"},{"Name":"Last-Modified","Value":"Sun, 04 May 2025 16:05:58 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1139"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022jnTX9snOoyX6kaDrtKd\u002B8sRqkpP34gs90DbsjdqG17k=\u0022"},{"Name":"Last-Modified","Value":"Thu, 08 May 2025 16:52:39 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/KioskManagementWebApp/lib/bootstrap/dist/css/bootstrap-grid.bqjiyaj88i.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\bootstrap\dist\css\bootstrap-grid.css'))</AssetFile>

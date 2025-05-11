@@ -1,0 +1,141 @@
+﻿.sidebar {
+	width: 250px;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(180deg, #a5a5a5, #f1f4f8);
+	padding: 20px 15px;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+	.sidebar h4 {
+		color: #333;
+		font-weight: 600;
+		margin-bottom: 20px;
+	}
+
+	.sidebar hr {
+		border-color: #d1d5db;
+		margin: 15px 0;
+	}
+
+.nav-link {
+	display: flex;
+	align-items: center;
+	padding: 12px 15px;
+	color: #4b5563;
+	font-weight: 500;
+	border-radius: 8px;
+	margin-bottom: 8px;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+	.nav-link i {
+		margin-right: 10px;
+		font-size: 1.2rem;
+	}
+
+	.nav-link:hover {
+		background-color: #e5e7eb;
+		color: #1f2937;
+	}
+
+	.nav-link.active {
+		background: linear-gradient(90deg, #3b82f6, #60a5fa);
+		color: white !important;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+.content {
+	margin-left: 270px;
+	padding: 20px;
+}
+
+.card-kiosk {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 10px;
+	text-align: center;
+	background-color: #ecf0f1;
+	transition: transform 0.2s;
+}
+
+	.card-kiosk:hover {
+		transform: scale(1.02);
+	}
+
+	.card-kiosk.rented {
+		background-color: #d4edda;
+	}
+
+.btn-custom {
+	margin: 5px;
+}
+
+.modal-warning {
+	--bs-modal-color: #fff;
+	--bs-modal-bg: #ff4444;
+	--bs-modal-border-color: #ff6666;
+	--bs-modal-box-shadow: 0 5px 15px rgba(255, 68, 68, 0.5);
+}
+
+	.modal-warning .modal-header {
+		background-color: #ff5555;
+		color: white;
+		border-bottom: none;
+		border-top-left-radius: 0.3rem;
+		border-top-right-radius: 0.3rem;
+	}
+
+	.modal-warning .modal-body {
+		color: #333;
+		background-color: #fff;
+		padding: 20px;
+		border-bottom-left-radius: 0.3rem;
+		border-bottom-right-radius: 0.3rem;
+	}
+
+	.modal-warning .modal-footer {
+		border-top: none;
+		background-color: #fff;
+		border-bottom-left-radius: 0.3rem;
+		border-bottom-right-radius: 0.3rem;
+	}
+
+	.modal-warning .btn-close {
+		filter: invert(1) brightness(2);
+	}
+
+.nav-tabs .nav-link {
+	color: #495057;
+	border: none;
+	border-bottom: 2px solid transparent;
+}
+
+	.nav-tabs .nav-link.active {
+		color: #28a745; /* Màu xanh lá cho tab "Cho thuê" */
+		border-bottom: 2px solid #28a745;
+		background-color: transparent;
+	}
+
+.tab-content {
+	padding: 20px;
+	background-color: #fff;
+	border-bottom-left-radius: 0.3rem;
+	border-bottom-right-radius: 0.3rem;
+}
+
+#rent-estimated-fee {
+	font-weight: bold;
+	color: #28a745;
+	margin-top: 10px;
+}
+.card-kiosk.unpaid {
+	background-color: #fff3cd; /* Màu vàng nhạt cho kiosk chưa thanh toán */
+}
+.card-kiosk.paid {
+	background-color: #ecf0f1;
+}

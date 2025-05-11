@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\KioskManagementWebApp.6vxcdawrdi.bundle.scp.css"
     },
     {
+      "Id": "D:\\UML\\KioskManagementWebApp\\wwwroot\\css\\Kiosk.css",
+      "PackagePath": "staticwebassets\\css\\Kiosk.css"
+    },
+    {
       "Id": "D:\\UML\\KioskManagementWebApp\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

@@ -58,8 +58,10 @@ D:\UML\KioskManagementWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
 D:\UML\KioskManagementWebApp\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
 D:\UML\KioskManagementWebApp\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
 D:\UML\KioskManagementWebApp\wwwroot\lib\jquery\dist\jquery.min.js
+D:\UML\KioskManagementWebApp\wwwroot\css\Kiosk.css
 D:\UML\KioskManagementWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
 D:\UML\KioskManagementWebApp\wwwroot\js\site.js
+wwwroot\css\Kiosk.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\site.js

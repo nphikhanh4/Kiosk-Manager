@@ -1,26 +1,219 @@
-﻿@model IEnumerable<KioskManagementWebApp.Models.Tuition>
-<h2>Quản lý Học phí</h2>
-<a asp-action="Create" class="btn btn-primary">Thêm Học phí</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Mã sinh viên</th>
-            <th>Tên sinh viên</th>
-            <th>Số tiền</th>
-            <th>Hạn nộp</th>
-            <th>Trạng thái</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var tuition in Model)
-        {
-            <tr>
-                <td>@tuition.StudentId</td>
-                <td>@tuition.StudentName</td>
-                <td>@tuition.Amount</td>
-                <td>@tuition.DueDate.ToShortDateString()</td>
-                <td>@(tuition.IsPaid ? "Đã thanh toán" : "Chưa thanh toán")</td>
-            </tr>
+﻿    @model List<KioskManagementWebApp.Models.TuitionFee>
+
+    @{
+        ViewData["Title"] = "Đóng học phí";
+    }
+
+    <style>
+        .tuition-container {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            margin: 30px auto;
+            max-width: 1400px;
         }
-    </tbody>
-</table>
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .table-container {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease;
+        }
+
+            .table-container:hover {
+                transform: translateY(-3px);
+            }
+
+        .table thead {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: #ffffff;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .table th, .table td {
+            padding: 15px;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .table tbody tr.tuition-row {
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+            .table tbody tr.tuition-row:hover {
+                background-color: #f1f4f8;
+                transform: scale(1.01);
+            }
+
+        .btn-pay {
+            background: linear-gradient(to right, #28a745, #1e7e34);
+            border: none;
+            padding: 8px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            color: #ffffff;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+            .btn-pay:hover {
+                background: linear-gradient(to right, #218838, #1c6d2f);
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            }
+
+            .btn-pay:active {
+                transform: translateY(1px);
+                box-shadow: 0 2px 5px rgba(40, 167, 69, 0.2);
+            }
+
+        .details-row {
+            display: none; /* Ẩn mặc định */
+            background-color: #f8f9fa;
+        }
+
+            .details-row.active {
+                display: table-row; /* Hiển thị khi được toggle */
+            }
+
+        .details-table {
+            margin: 0;
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+            .details-table th, .details-table td {
+                padding: 10px;
+                text-align: left;
+                border: 1px solid #e9ecef;
+            }
+
+            .details-table th {
+                background-color: #e9ecef;
+                font-weight: 600;
+            }
+    </style>
+
+    <div class="tab-pane fade show active" id="tuition-content" role="tabpanel" aria-labelledby="tuition-tab">
+        <div class="container tuition-container">
+            <h2 class="section-title">Danh sách học phí cần thanh toán</h2>
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-container">
+                    <table class="table table-bordered mb-0">
+                        <thead>
+                            <tr>
+                                <th>Mã SV</th>
+                                <th>Họ tên</th>
+                                <th>Khoa</th>
+                                <th>Số tiền</th>
+                                <th>Ngày đến hạn</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="tuition-row" data-details-id="details-@item.Id">
+                                    <td>@item.Student.StudentId</td>
+                                    <td>@item.Student.StudentName</td>
+                                    <td>@item.Student.Department</td>
+                                    <td>@item.Amount.ToString("N0") VNĐ</td>
+                                    <td>@item.DueDate.ToString("dd/MM/yyyy")</td>
+                                    <td>
+                                        <form asp-action="Pay" asp-controller="Tuition" method="post" style="display:inline;">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-pay">Thanh toán</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr class="details-row" id="details-@item.Id">
+                                    <td colspan="6">
+                                        <table class="details-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Môn học</th>
+                                                    <th>Học phí</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (item.TuitionFeeDetails != null && item.TuitionFeeDetails.Any())
+                                                {
+                                                    foreach (var detail in item.TuitionFeeDetails)
+                                                    {
+                                                        <tr>
+                                                            <td>@detail.SubjectName</td>
+                                                            <td>@detail.SubjectFee.ToString("N0") VNĐ</td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td colspan="2" class="text-center">Không có chi tiết học phí.</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <p class="text-end fw-bold m-2">Tổng cộng: @item.Amount.ToString("N0") VNĐ</p>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info text-center" role="alert">
+                    Không có học phí nào cần thanh toán.
+                </div>
+            }
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+            document.querySelectorAll('form').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    if (!confirm('Bạn có chắc chắn muốn thanh toán học phí này?')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            // Toggle chi tiết học phí khi click vào hàng TuitionFee
+            document.querySelectorAll('.tuition-row').forEach(row => {
+                row.addEventListener('click', function(e) {
+                    // Ngăn chặn toggle khi click vào nút Thanh toán
+                    if (e.target.closest('.btn-pay') || e.target.tagName === 'BUTTON' || e.target.tagName === 'FORM') {
+                        return;
+                    }
+
+                    const detailsId = this.getAttribute('data-details-id');
+                    const detailsRow = document.getElementById(detailsId);
+                    detailsRow.classList.toggle('active');
+                });
+            });
+        </script>
+    }

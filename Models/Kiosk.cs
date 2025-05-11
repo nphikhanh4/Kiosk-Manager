@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KioskManagementWebApp.Models
@@ -15,16 +16,14 @@ namespace KioskManagementWebApp.Models
         public string Location { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(10, 2)")]
+        public decimal RentalFee { get; set; }
+
         public bool IsRented { get; set; }
 
-        public string? RenterName { get; set; } // Nullable string
+        public bool Active { get; set; } = true;
 
-        [Required]
-        public DateTime RentalStartDate { get; set; }
-
-        public DateTime? RentalEndDate { get; set; } // Nullable DateTime
-
-        [Required]
-        public decimal RentalFee { get; set; }
+        // Navigation property cho mối quan hệ 1-nhiều với Renter
+        public virtual ICollection<Renter> Renters { get; set; } = new List<Renter>();
     }
 }
