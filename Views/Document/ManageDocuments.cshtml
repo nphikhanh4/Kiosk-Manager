@@ -1,0 +1,369 @@
+﻿@model KioskManagementWebApp.Models.DocumentManagementViewModel
+
+@{
+    ViewData["Title"] = "Quản lý Tài liệu";
+    var role = ViewData["Role"] as string;
+}
+
+<style>
+    .management-container {
+        background-color: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #343a40;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .stats-card {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .table-container {
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .table thead {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .table tbody tr {
+        transition: background-color 0.3s ease;
+    }
+
+        .table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+    .btn-manage {
+        background-color: #17a2b8;
+        border: none;
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+    }
+
+        .btn-manage:hover {
+            background-color: #138496;
+            transform: scale(1.02);
+        }
+
+        .btn-manage:active {
+            transform: scale(0.98);
+        }
+
+    .btn-create-new {
+        background-color: #28a745;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+        margin-bottom: 20px;
+    }
+
+        .btn-create-new:hover {
+            background-color: #218838;
+            transform: scale(1.02);
+        }
+
+        .btn-create-new:active {
+            transform: scale(0.98);
+        }
+
+    .btn-stats-detail {
+        background-color: #ffca2c;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+        margin-bottom: 20px;
+    }
+
+        .btn-stats-detail:hover {
+            background-color: #e0b324;
+            transform: scale(1.02);
+        }
+
+        .btn-stats-detail:active {
+            transform: scale(0.98);
+        }
+</style>
+
+<div class="tab-pane fade @((ViewContext.RouteData.Values["controller"].ToString() == "Document" && ViewContext.RouteData.Values["action"].ToString() == "ManageDocuments") ? "show active" : "")"
+     id="document-management-content" role="tabpanel" aria-labelledby="document-management-tab">
+    <div class="container management-container">
+        @if (!string.IsNullOrEmpty(role) && role == "Admin")
+        {
+            <h2 class="section-title">Quản lý Tài liệu</h2>
+
+            <!-- Nút Thêm tài liệu mới -->
+            <div class="d-flex justify-content-end mb-3">
+                <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#createModal">Thêm tài liệu mới</button>
+            </div>
+
+            <!-- Thống kê tài liệu đã bán -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-card">
+                        <h5>Tổng số tài liệu đã bán</h5>
+                        <p class="text-success fw-bold fs-4">@Model.TotalSoldDocuments</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stats-card">
+                        <h5>Tổng doanh thu</h5>
+                        <p class="text-success fw-bold fs-4">@Model.TotalRevenue.ToString("N0") VNĐ</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stats-card">
+                        <h5>Tổng số tài liệu trong kho</h5>
+                        <p class="text-success fw-bold fs-4">@Model.TotalStock</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng quản lý tài liệu -->
+            <div class="table-container mt-4">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tên tài liệu</th>
+                            <th>Loại</th>
+                            <th>Giá</th>
+                            <th>Kho</th>
+                            <th>Đã bán</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Documents)
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@item.Type</td>
+                                <td>@item.Price.ToString("N0") VNĐ</td>
+                                <td>@item.Stock</td>
+                                <td>@(Model.SoldQuantities.ContainsKey(item.Id) ? Model.SoldQuantities[item.Id] : 0)</td>
+                                <td>
+                                    <button class="btn btn-manage btn-info me-2 edit-document" data-id="@item.Id" data-title="@item.Title" data-type="@item.Type" data-price="@item.Price" data-stock="@item.Stock">Sửa</button>
+                                    <button class="btn btn-manage btn-danger delete-document" data-id="@item.Id">Xóa</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning text-center" role="alert">
+                Bạn không có quyền truy cập vào trang này. Vui lòng liên hệ Admin.
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal Thêm tài liệu mới -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Thêm tài liệu mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createForm" asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="create-title">Tên tài liệu</label>
+                        <input type="text" class="form-control" id="create-title" name="Title" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="create-type">Loại</label>
+                        <input type="text" class="form-control" id="create-type" name="Type" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="create-price">Giá (VNĐ)</label>
+                        <input type="number" step="0.01" class="form-control" id="create-price" name="Price" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="create-stock">Số lượng trong kho</label>
+                        <input type="number" class="form-control" id="create-stock" name="Stock" required />
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Sửa tài liệu -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Sửa tài liệu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" asp-action="Edit" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="edit-id" name="id" />
+                    <div class="form-group">
+                        <label for="edit-title">Tên tài liệu</label>
+                        <input type="text" class="form-control" id="edit-title" name="title" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-type">Loại</label>
+                        <input type="text" class="form-control" id="edit-type" name="type" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-price">Giá (VNĐ)</label>
+                        <input type="number" step="0.01" class="form-control" id="edit-price" name="price" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-stock">Số lượng trong kho</label>
+                        <input type="number" class="form-control" id="edit-stock" name="stock" required />
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Khởi tạo instance modal duy nhất, không dùng backdrop: 'static'
+            const createModal = new bootstrap.Modal(document.getElementById('createModal'));
+            const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+
+            // Mở modal Thêm tài liệu
+            document.querySelector('[data-bs-target="#createModal"]').addEventListener('click', function () {
+                document.getElementById('createForm').reset();
+                createModal.show();
+            });
+
+            // Mở modal Sửa tài liệu
+            document.querySelectorAll('.edit-document').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    const title = this.getAttribute('data-title');
+                    const type = this.getAttribute('data-type');
+                    const price = this.getAttribute('data-price');
+                    const stock = this.getAttribute('data-stock');
+
+                    document.getElementById('edit-id').value = id;
+                    document.getElementById('edit-title').value = title;
+                    document.getElementById('edit-type').value = type;
+                    document.getElementById('edit-price').value = price;
+                    document.getElementById('edit-stock').value = stock;
+
+                    editModal.show();
+                });
+            });
+
+            // Thêm tài liệu
+            document.getElementById('createForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                fetch('/Document/Create', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        createModal.hide(); // Đóng modal sau khi thành công
+                        location.reload();
+                    } else {
+                        alert('Lỗi: ' + data.errors.join('\n'));
+                    }
+                }).catch(error => console.error('Error:', error));
+            });
+
+            // Sửa tài liệu
+            document.getElementById('editForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                fetch('/Document/Edit', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        editModal.hide(); // Đóng modal sau khi thành công
+                        location.reload();
+                    } else {
+                        alert('Lỗi: ' + data.errors.join('\n'));
+                    }
+                }).catch(error => console.error('Error:', error));
+            });
+
+            // Xóa tài liệu
+            document.querySelectorAll('.delete-document').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = parseInt(this.getAttribute('data-id'), 10);
+                    if (isNaN(id)) {
+                        alert('ID không hợp lệ.');
+                        return;
+                    }
+
+                    if (!confirm('Bạn có chắc muốn xóa tài liệu này?')) {
+                        return;
+                    }
+
+                    fetch('/Document/Delete', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify({ id: id })
+                    }).then(response => response.json()).then(data => {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Lỗi: ' + data.errors.join('\n'));
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Đã xảy ra lỗi khi xóa tài liệu. Vui lòng thử lại.');
+                    });
+                });
+            });
+        });
+    </script>
+}

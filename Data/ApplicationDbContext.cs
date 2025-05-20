@@ -11,7 +11,8 @@ namespace KioskManagementWebApp.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Student> Students { get; set; }
+        public DbSet<Student> Students { get; set; }    
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<TuitionFee> TuitionFees { get; set; }
         public DbSet<TuitionFeeDetail> TuitionFeeDetails { get; set; }
 
@@ -49,6 +50,10 @@ namespace KioskManagementWebApp.Data
                 .WithOne(tfd => tfd.TuitionFee)
                 .HasForeignKey(tfd => tfd.TuitionFeeId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Account>()
+                .HasCheckConstraint("CHK_StudentId_Role",
+                    "(Role = 'Student' AND StudentId IS NOT NULL) OR (Role = 'Admin' AND StudentId IS NULL)");
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<KioskManagementWebApp.Models.Kiosk>
+
 @{
     int vacantCount = 0;
     int rentedCount = 0;
@@ -13,299 +14,6 @@
         else
             rentedCount++;
     }
-}
-
-@section Scripts {
-    <script>
-               document.querySelectorAll('.view-details').forEach(button => {
-                   button.addEventListener('click', function () {
-                       const id = this.getAttribute('data-id');
-                       const name = this.getAttribute('data-name');
-                       const location = this.getAttribute('data-location');
-                       const isRented = this.getAttribute('data-isrented') === 'true';
-                       const renterName = this.getAttribute('data-rentername');
-                       const rentalStartDate = this.getAttribute('data-rentalstartdate');
-                       const rentalEndDate = this.getAttribute('data-rentalenddate');
-                       const rentalFee = this.getAttribute('data-rentalfee');
-
-                       document.getElementById('modal-name').textContent = name;
-                       document.getElementById('modal-location').textContent = location;
-                       document.getElementById('modal-isrented').textContent = isRented ? 'Đã cho thuê' : 'Chưa cho thuê';
-                       document.getElementById('modal-rentername').textContent = renterName;
-                       document.getElementById('modal-rentalstartdate').textContent = rentalStartDate;
-                       document.getElementById('modal-rentalenddate').textContent = rentalEndDate;
-                       document.getElementById('modal-rentalfee').textContent = rentalFee;
-
-                       new bootstrap.Modal(document.getElementById('kioskDetailModal')).show();
-                   });
-               });
-
-               document.querySelectorAll('.edit-kiosk').forEach(button => {
-                   button.addEventListener('click', function () {
-                       const isRented = this.getAttribute('data-isrented') === 'true';
-
-                       if (isRented) {
-                           new bootstrap.Modal(document.getElementById('editWarningModal')).show();
-                           return;
-                       }
-
-                       const id = this.getAttribute('data-id');
-                       const name = this.getAttribute('data-name');
-                       const location = this.getAttribute('data-location');
-                       const rentalFee = this.getAttribute('data-rentalfee').replace(/[^\d.]/g, '');
-
-                       document.getElementById('edit-id').value = id;
-                       document.getElementById('edit-name').value = name;
-                       document.getElementById('edit-location').value = location;
-                       document.getElementById('edit-rentalfee').value = rentalFee;
-
-                       new bootstrap.Modal(document.getElementById('editModal')).show();
-                   });
-               });
-
-               document.getElementById('createForm').addEventListener('submit', function (event) {
-                   event.preventDefault();
-                   const formData = new FormData(this);
-                   fetch('/Kiosk/Create', {
-                       method: 'POST',
-                       body: formData
-                   }).then(response => response.json()).then(data => {
-                       if (data.success) {
-                           location.reload();
-                       } else {
-                           alert('Lỗi: ' + data.errors.join('\n'));
-                       }
-                   }).catch(error => console.error('Error:', error));
-               });
-
-               document.getElementById('editForm').addEventListener('submit', function (event) {
-                   event.preventDefault();
-                   const formData = new FormData(this);
-                   fetch('/Kiosk/Edit', {
-                       method: 'POST',
-                       body: formData
-                   }).then(response => response.json()).then(data => {
-                       if (data.success) {
-                           location.reload();
-                       } else {
-                           alert('Lỗi: ' + data.errors.join('\n'));
-                       }
-                   }).catch(error => console.error('Error:', error));
-               });
-
-               document.querySelectorAll('.return-kiosk').forEach(button => {
-                   button.addEventListener('click', function () {
-                       const rawDataId = this.getAttribute('data-id');
-                       const kioskId = parseInt(rawDataId, 10);
-                       if (isNaN(kioskId)) {
-                           alert('ID không hợp lệ.');
-                           return;
-                       }
-                       fetch('/Kiosk/ReturnKiosk', {
-                           method: 'POST',
-                           headers: { 'Content-Type': 'application/json' },
-                           body: JSON.stringify({ id: kioskId })
-                       }).then(response => response.json()).then(data => {
-                           if (data.success) {
-                               location.reload();
-                           } else {
-                               alert('Lỗi: ' + data.errors.join('\n'));
-                           }
-                       }).catch(error => console.error('Error:', error));
-                   });
-               });
-
-               document.querySelectorAll('.rent-kiosk').forEach(button => {
-                   button.addEventListener('click', function () {
-                       const id = this.getAttribute('data-id');
-                       const name = this.getAttribute('data-name');
-                       const location = this.getAttribute('data-location');
-                       const rentalFee = this.getAttribute('data-rentalfee').replace(/[^\d.]/g, '');
-
-                       document.getElementById('rent-id').value = id;
-                       document.getElementById('rent-rentername').value = '';
-                       document.getElementById('rent-rentalstartdate').value = '@DateTime.Today.ToString("yyyy-MM-dd")';
-                       document.getElementById('rent-rentalenddate').value = '';
-                       document.getElementById('rent-estimated-fee').textContent = '';
-                       document.getElementById('rentalstartdate-error').style.display = 'none';
-                       document.getElementById('rentalenddate-error').style.display = 'none';
-
-                       new bootstrap.Modal(document.getElementById('rentModal')).show();
-                   });
-               });
-
-               document.getElementById('rentForm').addEventListener('submit', function (event) {
-                   event.preventDefault();
-                   const id = document.getElementById('rent-id').value;
-                   const renterName = document.getElementById('rent-rentername').value;
-                   const rentalStartDate = document.getElementById('rent-rentalstartdate').value;
-                   const rentalEndDate = document.getElementById('rent-rentalenddate').value;
-
-                   if (!id || !renterName || !rentalStartDate || !rentalEndDate) {
-                       alert('Vui lòng điền đầy đủ thông tin.');
-                       return;
-                   }
-
-                   if (!validateStartDate() || !validateEndDate()) {
-                       return;
-                   }
-
-                   fetch('/Kiosk/RentKiosk', {
-                       method: 'POST',
-                       headers: { 'Content-Type': 'application/json' },
-                       body: JSON.stringify({
-                           id: parseInt(id),
-                           renterName: renterName,
-                           rentalStartDate: rentalStartDate,
-                           rentalEndDate: rentalEndDate
-                       })
-                   }).then(response => response.json()).then(data => {
-                       if (data.success) {
-                           location.reload();
-                       } else {
-                           alert('Lỗi: ' + data.errors.join('\n'));
-                       }
-                   }).catch(error => {
-                       console.error('Error:', error);
-                       alert('Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
-                   });
-               });
-
-               function validateStartDate() {
-                   const startDate = document.getElementById('rent-rentalstartdate').value;
-                   const errorDiv = document.getElementById('rentalstartdate-error');
-
-                   if (!startDate) {
-                       errorDiv.style.display = 'none';
-                       return false;
-                   }
-
-                   const today = new Date();
-                   today.setHours(0, 0, 0, 0);
-                   const start = new Date(startDate);
-
-                   if (start <= today) {
-                       errorDiv.style.display = 'block';
-                       return false;
-                   } else {
-                       errorDiv.style.display = 'none';
-                       return true;
-                   }
-               }
-
-               function validateEndDate() {
-                   const startDate = document.getElementById('rent-rentalstartdate').value;
-                   const endDate = document.getElementById('rent-rentalenddate').value;
-                   const errorDiv = document.getElementById('rentalenddate-error');
-
-                   if (!startDate || !endDate) {
-                       errorDiv.style.display = 'none';
-                       return false;
-                   }
-
-                   const start = new Date(startDate);
-                   const end = new Date(endDate);
-                   const minEndDate = new Date(start);
-                   minEndDate.setMonth(start.getMonth() + 6);
-
-                   if (end < minEndDate) {
-                       errorDiv.style.display = 'block';
-                       return false;
-                   } else {
-                       errorDiv.style.display = 'none';
-                       return true;
-                   }
-        Interchange
-               });
-
-               document.querySelectorAll('.delete-kiosk').forEach(button => {
-                   button.addEventListener('click', function () {
-                       const kioskId = parseInt(this.getAttribute('data-id'), 10);
-                       if (isNaN(kioskId)) {
-                           alert('ID không hợp lệ.');
-                           return;
-                       }
-
-                       if (!confirm('Bạn có chắc muốn xóa kiosk này?')) {
-                           return;
-                       }
-
-                       fetch('/Kiosk/DeleteKiosk', {
-                           method: 'POST',
-                           headers: { 'Content-Type': 'application/json' },
-                           body: JSON.stringify({ id: kioskId })
-                       }).then(response => response.json()).then(data => {
-                           if (data.success) {
-                               location.reload();
-                           } else {
-                               alert('Lỗi: ' + data.errors.join('\n'));
-                           }
-                       }).catch(error => {
-                           console.error('Error:', error);
-                           alert('Đã xảy ra lỗi khi xóa kiosk. Vui lòng thử lại.');
-                       });
-                   });
-               });
-
-               document.querySelectorAll('.pay-kiosk').forEach(button => {
-                   button.addEventListener('click', function () {
-                       const renterId = parseInt(this.getAttribute('data-renterid'), 10);
-                       const amount = parseFloat(this.getAttribute('data-amount').replace(/,/g, '')) || 0;
-
-                       if (isNaN(renterId)) {
-                           alert('Renter ID không hợp lệ.');
-                           return;
-                       }
-
-                       if (!confirm(`Bạn có chắc muốn xác nhận thanh toán ${amount.toLocaleString('vi-VN')} VNĐ cho renter này?`)) {
-                           return;
-                       }
-
-                       fetch('/Kiosk/Pay', {
-                           method: 'POST',
-                           headers: { 'Content-Type': 'application/json' },
-                           body: JSON.stringify({ renterId: renterId })
-                       }).then(response => response.json()).then(data => {
-                           if (data.success) {
-                               location.reload();
-                           } else {
-                               alert('Lỗi: ' + data.errors.join('\n'));
-                           }
-                       }).catch(error => {
-                           console.error('Error:', error);
-                           alert('Đã xảy ra lỗi khi xử lý thanh toán. Vui lòng thử lại.');
-                       });
-                   });
-               });
-
-               function calculateEstimatedFee() {
-                   const startDate = document.getElementById('rent-rentalstartdate').value;
-                   const endDate = document.getElementById('rent-rentalenddate').value;
-                   const rentalFee = parseFloat(document.querySelector('.rent-kiosk.active')?.getAttribute('data-rentalfee')?.replace(/[^\d.]/g, '') || 0);
-
-                   if (!validateStartDate() || !validateEndDate() || !startDate || !endDate || !rentalFee) {
-                       document.getElementById('rent-estimated-fee').textContent = '';
-                       return;
-                   }
-
-                   const start = new Date(startDate);
-                   const end = new Date(endDate);
-                   const diffMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-                   const startDay = start.getDate();
-
-                   let totalFee = 0;
-                   if (diffMonths >= 0) {
-                       if (startDay > 15) {
-                           totalFee += rentalFee * 0.5;
-                       } else {
-                           totalFee += rentalFee;
-                       }
-                       totalFee += rentalFee * Math.max(0, diffMonths - (startDay > 15 ? 0 : 1));
-                   }
-
-                   document.getElementById('rent-estimated-fee').textContent = `Phí dự kiến: ${totalFee.toLocaleString('vi-VN')} VNĐ`;
-               }
-    </script>
 }
 
 <div class="tab-pane fade show active" id="kiosk-content" role="tabpanel" aria-labelledby="kiosk-tab">
@@ -422,6 +130,7 @@
             </div>
             <div class="modal-body">
                 <form id="createForm" asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
                     <input type="hidden" name="IsRented" value="false" />
                     <div class="form-group">
                         <label for="create-name">Tên Kiosk</label>
@@ -454,6 +163,7 @@
             </div>
             <div class="modal-body">
                 <form id="editForm" asp-action="Edit" method="post">
+                    @Html.AntiForgeryToken()
                     <input type="hidden" id="edit-id" name="id" />
                     <div class="form-group">
                         <label for="edit-name">Tên Kiosk</label>
@@ -503,7 +213,6 @@
             </div>
             <ul class="nav nav-tabs" id="rentTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button',
                     <button class="nav-link active" id="rent-form-tab" data-bs-toggle="tab" data-bs-target="#rent-form-content" type="button" role="tab" aria-controls="rent-form-content" aria-selected="true">Điền thông tin</button>
                 </li>
             </ul>
@@ -511,6 +220,7 @@
                 <div class="tab-pane fade show active" id="rent-form-content" role="tabpanel" aria-labelledby="rent-form-tab">
                     <div class="modal-body">
                         <form id="rentForm" method="post">
+                            @Html.AntiForgeryToken()
                             <input type="hidden" id="rent-id" name="id" />
                             <div class="form-group">
                                 <label for="rent-rentername">Tên người thuê</label>
@@ -544,3 +254,326 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Xem chi tiết
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+                    const location = this.getAttribute('data-location');
+                    const isRented = this.getAttribute('data-isrented') === 'true';
+                    const renterName = this.getAttribute('data-rentername');
+                    const rentalStartDate = this.getAttribute('data-rentalstartdate');
+                    const rentalEndDate = this.getAttribute('data-rentalenddate');
+                    const rentalFee = this.getAttribute('data-rentalfee');
+
+                    document.getElementById('modal-name').textContent = name;
+                    document.getElementById('modal-location').textContent = location;
+                    document.getElementById('modal-isrented').textContent = isRented ? 'Đã cho thuê' : 'Chưa cho thuê';
+                    document.getElementById('modal-rentername').textContent = renterName;
+                    document.getElementById('modal-rentalstartdate').textContent = rentalStartDate;
+                    document.getElementById('modal-rentalenddate').textContent = rentalEndDate;
+                    document.getElementById('modal-rentalfee').textContent = rentalFee;
+
+                    new bootstrap.Modal(document.getElementById('kioskDetailModal')).show();
+                });
+            });
+
+            // Sửa kiosk
+            document.querySelectorAll('.edit-kiosk').forEach(button => {
+                button.addEventListener('click', function () {
+                    const isRented = this.getAttribute('data-isrented') === 'true';
+
+                    if (isRented) {
+                        new bootstrap.Modal(document.getElementById('editWarningModal')).show();
+                        return;
+                    }
+
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+                    const location = this.getAttribute('data-location');
+                    const rentalFee = this.getAttribute('data-rentalfee').replace(/[^\d.]/g, '');
+
+                    document.getElementById('edit-id').value = id;
+                    document.getElementById('edit-name').value = name;
+                    document.getElementById('edit-location').value = location;
+                    document.getElementById('edit-rentalfee').value = rentalFee;
+
+                    new bootstrap.Modal(document.getElementById('editModal')).show();
+                });
+            });
+
+            // Thêm kiosk
+            document.getElementById('createForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                fetch('/Kiosk/Create', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Lỗi: ' + data.errors.join('\n'));
+                    }
+                }).catch(error => console.error('Error:', error));
+            });
+
+            // Sửa kiosk
+            document.getElementById('editForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                fetch('/Kiosk/Edit', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Lỗi: ' + data.errors.join('\n'));
+                    }
+                }).catch(error => console.error('Error:', error));
+            });
+
+            // Hủy thuê
+            document.querySelectorAll('.return-kiosk').forEach(button => {
+                button.addEventListener('click', function () {
+                    const rawDataId = this.getAttribute('data-id');
+                    const kioskId = parseInt(rawDataId, 10);
+                    if (isNaN(kioskId)) {
+                        alert('ID không hợp lệ.');
+                        return;
+                    }
+                    fetch('/Kiosk/ReturnKiosk', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify({ id: kioskId })
+                    }).then(response => response.json()).then(data => {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Lỗi: ' + data.errors.join('\n'));
+                        }
+                    }).catch(error => console.error('Error:', error));
+                });
+            });
+
+            // Cho thuê
+            document.querySelectorAll('.rent-kiosk').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+                    const location = this.getAttribute('data-location');
+                    const rentalFee = this.getAttribute('data-rentalfee').replace(/[^\d.]/g, '');
+
+                    document.getElementById('rent-id').value = id;
+                    document.getElementById('rent-rentername').value = '';
+                    document.getElementById('rent-rentalstartdate').value = '@DateTime.Today.ToString("yyyy-MM-dd")';
+                    document.getElementById('rent-rentalenddate').value = '';
+                    document.getElementById('rent-estimated-fee').textContent = '';
+                    document.getElementById('rentalstartdate-error').style.display = 'none';
+                    document.getElementById('rentalenddate-error').style.display = 'none';
+
+                    new bootstrap.Modal(document.getElementById('rentModal')).show();
+                });
+            });
+
+            // Xử lý form "Cho thuê"
+            document.getElementById('rentForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const id = document.getElementById('rent-id').value;
+                const renterName = document.getElementById('rent-rentername').value;
+                const rentalStartDate = document.getElementById('rent-rentalstartdate').value;
+                const rentalEndDate = document.getElementById('rent-rentalenddate').value;
+
+                if (!id || !renterName || !rentalStartDate || !rentalEndDate) {
+                    alert('Vui lòng điền đầy đủ thông tin.');
+                    return;
+                }
+
+                if (!validateStartDate() || !validateEndDate()) {
+                    return;
+                }
+
+                fetch('/Kiosk/RentKiosk', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify({
+                        id: parseInt(id),
+                        renterName: renterName,
+                        rentalStartDate: rentalStartDate,
+                        rentalEndDate: rentalEndDate
+                    })
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Lỗi: ' + data.errors.join('\n'));
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.');
+                });
+            });
+
+            // Xóa kiosk
+            document.querySelectorAll('.delete-kiosk').forEach(button => {
+                button.addEventListener('click', function () {
+                    const kioskId = parseInt(this.getAttribute('data-id'), 10);
+                    if (isNaN(kioskId)) {
+                        alert('ID không hợp lệ.');
+                        return;
+                    }
+
+                    if (!confirm('Bạn có chắc muốn xóa kiosk này?')) {
+                        return;
+                    }
+
+                    fetch('/Kiosk/DeleteKiosk', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify({ id: kioskId })
+                    }).then(response => response.json()).then(data => {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Lỗi: ' + data.errors.join('\n'));
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Đã xảy ra lỗi khi xóa kiosk. Vui lòng thử lại.');
+                    });
+                });
+            });
+
+            // Thanh toán
+            document.querySelectorAll('.pay-kiosk').forEach(button => {
+                button.addEventListener('click', function () {
+                    const renterId = parseInt(this.getAttribute('data-renterid'), 10);
+                    const amount = parseFloat(this.getAttribute('data-amount').replace(/,/g, '')) || 0;
+
+                    if (isNaN(renterId)) {
+                        alert('Renter ID không hợp lệ.');
+                        return;
+                    }
+
+                    if (!confirm(`Bạn có chắc muốn xác nhận thanh toán ${amount.toLocaleString('vi-VN')} VNĐ cho renter này?`)) {
+                        return;
+                    }
+
+                    fetch('/Kiosk/Pay', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify({ renterId: renterId })
+                    }).then(response => response.json()).then(data => {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Lỗi: ' + data.errors.join('\n'));
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Đã xảy ra lỗi khi xử lý thanh toán. Vui lòng thử lại.');
+                    });
+                });
+            });
+
+            // Validation ngày
+            function validateStartDate() {
+                const startDate = document.getElementById('rent-rentalstartdate').value;
+                const errorDiv = document.getElementById('rentalstartdate-error');
+
+                if (!startDate) {
+                    errorDiv.style.display = 'none';
+                    return false;
+                }
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const start = new Date(startDate);
+
+                if (start <= today) {
+                    errorDiv.style.display = 'block';
+                    return false;
+                } else {
+                    errorDiv.style.display = 'none';
+                    return true;
+                }
+            }
+
+            function validateEndDate() {
+                const startDate = document.getElementById('rent-rentalstartdate').value;
+                const endDate = document.getElementById('rent-rentalenddate').value;
+                const errorDiv = document.getElementById('rentalenddate-error');
+
+                if (!startDate || !endDate) {
+                    errorDiv.style.display = 'none';
+                    return false;
+                }
+
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                const minEndDate = new Date(start);
+                minEndDate.setMonth(start.getMonth() + 6);
+
+                if (end < minEndDate) {
+                    errorDiv.style.display = 'block';
+                    return false;
+                } else {
+                    errorDiv.style.display = 'none';
+                    return true;
+                }
+            }
+
+            // Tính phí dự kiến
+            function calculateEstimatedFee() {
+                const startDate = document.getElementById('rent-rentalstartdate').value;
+                const endDate = document.getElementById('rent-rentalenddate').value;
+                const rentalFee = parseFloat(document.querySelector('.rent-kiosk.active')?.getAttribute('data-rentalfee')?.replace(/[^\d.]/g, '') || 0);
+
+                if (!validateStartDate() || !validateEndDate() || !startDate || !endDate || !rentalFee) {
+                    document.getElementById('rent-estimated-fee').textContent = '';
+                    return;
+                }
+
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                const diffMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+                const startDay = start.getDate();
+
+                let totalFee = 0;
+                if (diffMonths >= 0) {
+                    if (startDay > 15) {
+                        totalFee += rentalFee * 0.5;
+                    } else {
+                        totalFee += rentalFee;
+                    }
+                    totalFee += rentalFee * Math.max(0, diffMonths - (startDay > 15 ? 0 : 1));
+                }
+
+                document.getElementById('rent-estimated-fee').textContent = `Phí dự kiến: ${totalFee.toLocaleString('vi-VN')} VNĐ`;
+            }
+        });
+    </script>
+}

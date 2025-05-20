@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý học phí</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .btn-create {
+            background-color: #28a745;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .details {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quản lý học phí</h1>
+    <p>
+        <a href="@Url.Action("Create", "Tuition")" class="btn btn-create">Thêm học phí</a>
+        <a href="@Url.Action("Index", "Tuition")" class="btn btn-primary">Quay lại</a>
+    </p>
+    <table>
+        <thead>
+            <tr>
+                <th>Mã sinh viên</th>
+                <th>Tên sinh viên</th>
+                <th>Tổng số tiền</th>
+                <th>Hạn nộp</th>
+                <th>Trạng thái</th>
+                <th>Ngày thanh toán</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tuition in Model)
+            {
+                <tr>
+                    <td>@tuition.StudentId</td>
+                    <td>@(tuition.Student?.StudentName ?? "N/A")</td>
+                    <td>@tuition.Amount.ToString("N2") VNĐ</td>
+                    <td>@tuition.DueDate.ToString("dd/MM/yyyy")</td> <!-- Sửa ở đây: bỏ HasValue -->
+                    <td>@(tuition.IsPaid ? "Đã thanh toán" : "Chưa thanh toán")</td>
+                    <td>@(tuition.PaymentDate.HasValue ? tuition.PaymentDate.Value.ToString("dd/MM/yyyy") : "N/A")</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Tuition", new { id = tuition.Id })" class="btn btn-edit">Sửa</a>
+                        <a href="@Url.Action("Delete", "Tuition", new { id = tuition.Id })" class="btn btn-delete">Xóa</a>
+                    </td>
+                </tr>
+                @if (tuition.TuitionFeeDetails != null && tuition.TuitionFeeDetails.Any())
+                {
+                    <tr>
+                        <td colspan="7" class="details">
+                            <strong>Chi tiết:</strong>
+                            <ul>
+                                @foreach (var detail in tuition.TuitionFeeDetails)
+                                {
+                                    <li>@detail.SubjectName: @detail.SubjectFee.ToString("N2") VNĐ</li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
+</html>

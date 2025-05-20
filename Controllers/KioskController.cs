@@ -24,6 +24,15 @@ namespace KioskManagementWebApp.Controllers
 
         public IActionResult Index()
         {
+            var role = HttpContext.Session.GetString("Role");
+            if (string.IsNullOrEmpty(role))
+            {
+                Console.WriteLine("Index: Role is null or empty, redirecting to Login");
+                return RedirectToAction("Login", "Account");
+            }
+
+            ViewData["Role"] = role;
+
             var kiosks = _context.Kiosks
                 .Include(k => k.Renters)
                 .Where(a => a.Active == true)

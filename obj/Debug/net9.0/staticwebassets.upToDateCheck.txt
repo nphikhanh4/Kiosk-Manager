@@ -64,6 +64,7 @@ D:\UML\KioskManagementWebApp\wwwroot\js\site.js
 wwwroot\css\Kiosk.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\img\QR_code.png
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

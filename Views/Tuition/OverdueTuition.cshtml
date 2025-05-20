@@ -1,7 +1,8 @@
 ﻿@model List<KioskManagementWebApp.Models.TuitionFee>
 
 @{
-    ViewData["Title"] = "Đóng học phí";
+    ViewData["Title"] = "Học phí đã quá hạn";
+    var role = ViewData["Role"] as string;
 }
 
 <style>
@@ -22,7 +23,7 @@
         text-align: center;
         letter-spacing: 1px;
         text-transform: uppercase;
-        background: linear-gradient(to right, #007bff, #00c6ff);
+        background: linear-gradient(to right, #ff4d4d, #ff8080);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -40,7 +41,7 @@
         }
 
     .table thead {
-        background: linear-gradient(to right, #007bff, #0056b3);
+        background: linear-gradient(to right, #ff4d4d, #cc0000);
         color: #ffffff;
         text-transform: uppercase;
         font-size: 0.9rem;
@@ -57,11 +58,11 @@
         .table th.sortable {
             cursor: pointer;
             position: relative;
-            padding-right: 30px; /* Để có chỗ cho biểu tượng mũi tên */
+            padding-right: 30px;
         }
 
             .table th.sortable:hover {
-                background: linear-gradient(to right, #0056b3, #003d82);
+                background: linear-gradient(to right, #cc0000, #990000);
             }
 
             .table th.sortable .sort-icon {
@@ -94,28 +95,6 @@
             transform: scale(1.01);
         }
 
-    .btn-pay {
-        background: linear-gradient(to right, #28a745, #1e7e34);
-        border: none;
-        padding: 8px 20px;
-        font-size: 1rem;
-        font-weight: 600;
-        border-radius: 8px;
-        color: #ffffff;
-        transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    }
-
-        .btn-pay:hover {
-            background: linear-gradient(to right, #218838, #1c6d2f);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-        }
-
-        .btn-pay:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 5px rgba(40, 167, 69, 0.2);
-        }
-
     .modal-content {
         border-radius: 15px;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
@@ -123,7 +102,7 @@
     }
 
     .modal-header {
-        background: linear-gradient(to right, #007bff, #0056b3);
+        background: linear-gradient(to right, #ff4d4d, #cc0000);
         color: #ffffff;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
@@ -138,23 +117,6 @@
     .modal-body {
         padding: 25px;
     }
-
-        .modal-body table {
-            margin: 0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .modal-body th, .modal-body td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .modal-body th {
-            background-color: #8fbae4;
-            font-weight: 600;
-        }
 
     .modal-footer {
         padding: 15px 20px;
@@ -202,23 +164,25 @@
         }
 </style>
 
-<a href="@Url.Action("Logout", "Account")" class="logout-btn">Đăng xuất</a>
-
 <div class="tab-pane fade show active" id="tuition-content" role="tabpanel" aria-labelledby="tuition-tab">
     <div class="container tuition-container">
-        <h2 class="section-title">Danh sách học phí cần thanh toán</h2>
+        <h2 class="section-title">Danh sách học phí đã quá hạn</h2>
         @if (Model != null && Model.Any())
         {
             <div class="table-container">
                 <table class="table table-bordered mb-0" id="tuition-table">
                     <thead>
                         <tr>
-                            <th class="sortable" data-sort="studentid">Mã SV <span class="sort-icon"></span></th>
-                            <th class="sortable" data-sort="studentname">Họ tên <span class="sort-icon"></span></th>
-                            <th class="sortable" data-sort="department">Khoa <span class="sort-icon"></span></th>
+                            @if (role == "Admin")
+                            {
+                                <th class="sortable" data-sort="studentid">Mã SV <span class="sort-icon"></span></th>
+                                <th class="sortable" data-sort="studentname">Họ tên <span class="sort-icon"></span></th>
+                                <th class="sortable" data-sort="department">Khoa <span class="sort-icon"></span></th>
+                            }
                             <th class="sortable" data-sort="amount">Số tiền <span class="sort-icon"></span></th>
                             <th class="sortable" data-sort="duedate">Ngày đến hạn <span class="sort-icon"></span></th>
-                            <th>Hành động</th>
+                            <th class="sortable" data-sort="status">Trạng thái <span class="sort-icon"></span></th>
+                            <th class="sortable" data-sort="paymentdate">Ngày thanh toán <span class="sort-icon"></span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -226,23 +190,23 @@
                         {
                             <tr class="tuition-row"
                                 data-id="@item.Id"
-                                data-studentid="@item.Student.StudentId"
-                                data-studentname="@item.Student.StudentName"
-                                data-department="@item.Student.Department"
-                                data-amount="@item.Amount.ToString("N0")"
-                                data-duedate="@item.DueDate.ToString("dd/MM/yyyy")">
-                                <td>@item.Student.StudentId</td>
-                                <td>@item.Student.StudentName</td>
-                                <td>@item.Student.Department</td>
-                                <td>@item.Amount.ToString("N0") VNĐ</td>
+                                data-studentid="@item.StudentId"
+                                data-studentname="@(item.Student?.StudentName ?? "N/A")"
+                                data-department="@(item.Student?.Department ?? "N/A")"
+                                data-amount="@item.Amount.ToString("N0", System.Globalization.CultureInfo.InvariantCulture)"
+                                data-duedate="@item.DueDate.ToString("dd/MM/yyyy")"
+                                data-status="@(item.IsPaid ? "Đã thanh toán" : "Chưa thanh toán")"
+                                data-paymentdate="@(item.PaymentDate.HasValue ? item.PaymentDate.Value.ToString("dd/MM/yyyy") : "N/A")">
+                                @if (role == "Admin")
+                                {
+                                    <td>@item.StudentId</td>
+                                    <td>@(item.Student?.StudentName ?? "N/A")</td>
+                                    <td>@(item.Student?.Department ?? "N/A")</td>
+                                }
+                                <td>@item.Amount.ToString("N0", System.Globalization.CultureInfo.InvariantCulture) VNĐ</td>
                                 <td>@item.DueDate.ToString("dd/MM/yyyy")</td>
-                                <td>
-                                    <form asp-action="Pay" asp-controller="Tuition" method="post" style="display:inline;">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="id" value="@item.Id" />
-                                        <button type="submit" class="btn btn-pay">Thanh toán</button>
-                                    </form>
-                                </td>
+                                <td>@(item.IsPaid ? "Đã thanh toán" : "Chưa thanh toán")</td>
+                                <td>@(item.PaymentDate.HasValue ? item.PaymentDate.Value.ToString("dd/MM/yyyy") : "N/A")</td>
                             </tr>
                         }
                     </tbody>
@@ -252,7 +216,7 @@
         else
         {
             <div class="alert alert-info text-center" role="alert">
-                Không có học phí nào cần thanh toán.
+                Không có học phí nào quá hạn.
             </div>
         }
     </div>
@@ -272,18 +236,8 @@
                 <p><strong>Khoa:</strong> <span id="modal-department"></span></p>
                 <p><strong>Số tiền:</strong> <span id="modal-amount"></span> VNĐ</p>
                 <p><strong>Ngày đến hạn:</strong> <span id="modal-duedate"></span></p>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Môn học</th>
-                            <th>Học phí</th>
-                        </tr>
-                    </thead>
-                    <tbody id="modal-details-body">
-                        <!-- Nội dung chi tiết sẽ được điền bằng JavaScript -->
-                    </tbody>
-                </table>
-                <p class="text-end fw-bold text-primary mt-3" id="modal-total"></p>
+                <p><strong>Trạng thái:</strong> <span id="modal-status"></span></p>
+                <p><strong>Ngày thanh toán:</strong> <span id="modal-paymentdate"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -295,16 +249,8 @@
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Xử lý xác nhận thanh toán
-            document.querySelectorAll('form').forEach(form => {
-                form.addEventListener('submit', function(e) {
-                    if (!confirm('Bạn có chắc chắn muốn thanh toán học phí này?')) {
-                        e.preventDefault();
-                    }
-                });
-            });
+            let currentTuitionId = null;
 
-            // Xử lý sắp xếp
             const table = document.getElementById('tuition-table');
             const headers = table.querySelectorAll('th.sortable');
 
@@ -314,19 +260,12 @@
                     const isAscending = this.classList.contains('asc');
                     const newDirection = isAscending ? 'desc' : 'asc';
 
-                    // Reset trạng thái sắp xếp của các cột khác
-                    headers.forEach(h => {
-                        h.classList.remove('asc', 'desc');
-                    });
-
-                    // Cập nhật trạng thái sắp xếp của cột hiện tại
+                    headers.forEach(h => h.classList.remove('asc', 'desc'));
                     this.classList.add(newDirection);
 
-                    // Lấy tất cả các hàng
                     const tbody = table.querySelector('tbody');
                     const rows = Array.from(tbody.querySelectorAll('tr.tuition-row'));
 
-                    // Sắp xếp các hàng
                     rows.sort((rowA, rowB) => {
                         let valueA, valueB;
 
@@ -351,11 +290,19 @@
                                 valueA = parseDate(rowA.getAttribute('data-duedate'));
                                 valueB = parseDate(rowB.getAttribute('data-duedate'));
                                 break;
+                            case 'status':
+                                valueA = rowA.getAttribute('data-status');
+                                valueB = rowB.getAttribute('data-status');
+                                break;
+                            case 'paymentdate':
+                                valueA = rowA.getAttribute('data-paymentdate') === 'N/A' ? 0 : parseDate(rowA.getAttribute('data-paymentdate'));
+                                valueB = rowB.getAttribute('data-paymentdate') === 'N/A' ? 0 : parseDate(rowB.getAttribute('data-paymentdate'));
+                                break;
                             default:
                                 return 0;
                         }
 
-                        if (sortKey === 'amount' || sortKey === 'duedate') {
+                        if (sortKey === 'amount' || sortKey === 'duedate' || sortKey === 'paymentdate') {
                             return newDirection === 'asc' ? valueA - valueB : valueB - valueA;
                         } else {
                             return newDirection === 'asc'
@@ -364,24 +311,19 @@
                         }
                     });
 
-                    // Xóa các hàng hiện tại trong tbody
                     while (tbody.firstChild) {
                         tbody.removeChild(tbody.firstChild);
                     }
 
-                    // Thêm lại các hàng đã sắp xếp
-                    rows.forEach(row => {
-                        tbody.appendChild(row);
-                    });
+                    rows.forEach(row => tbody.appendChild(row));
                 });
             });
 
-            // Hàm parse ngày định dạng dd/MM/yyyy
             function parseDate(dateStr) {
                 const parts = dateStr.split('/');
                 if (parts.length === 3) {
                     const day = parseInt(parts[0], 10);
-                    const month = parseInt(parts[1], 10) - 1; // Tháng trong JavaScript bắt đầu từ 0
+                    const month = parseInt(parts[1], 10) - 1;
                     const year = parseInt(parts[2], 10);
                     return new Date(year, month, day).getTime();
                 }
@@ -391,14 +333,9 @@
             // Xử lý click để hiển thị modal chi tiết
             document.querySelectorAll('.tuition-row').forEach(row => {
                 row.addEventListener('click', function(e) {
-                    // Ngăn chặn mở modal khi click vào nút Thanh toán
-                    if (e.target.closest('.btn-pay') || e.target.tagName === 'BUTTON' || e.target.tagName === 'FORM') {
-                        return;
-                    }
-
                     const id = this.getAttribute('data-id');
+                    currentTuitionId = id;
 
-                    // Gọi AJAX để lấy chi tiết học phí
                     fetch(`/Tuition/GetTuitionDetails?id=${id}`, {
                         method: 'GET',
                         headers: {
@@ -412,33 +349,14 @@
                             return;
                         }
 
-                        // Điền thông tin cơ bản
                         document.getElementById('modal-studentid').textContent = data.studentId;
                         document.getElementById('modal-studentname').textContent = data.studentName;
                         document.getElementById('modal-department').textContent = data.department;
                         document.getElementById('modal-amount').textContent = data.amount;
                         document.getElementById('modal-duedate').textContent = data.dueDate;
+                        document.getElementById('modal-status').textContent = data.status;
+                        document.getElementById('modal-paymentdate').textContent = data.paymentDate;
 
-                        // Điền chi tiết học phí
-                        const detailsBody = document.getElementById('modal-details-body');
-                        detailsBody.innerHTML = ''; // Xóa nội dung cũ
-
-                        if (data.tuitionDetails && data.tuitionDetails.length > 0) {
-                            data.tuitionDetails.forEach(detail => {
-                                const row = document.createElement('tr');
-                                row.innerHTML = `<td>${detail.subjectName}</td><td>${detail.subjectFee.toLocaleString()} VNĐ</td>`;
-                                detailsBody.appendChild(row);
-                            });
-                        } else {
-                            const row = document.createElement('tr');
-                            row.innerHTML = '<td colspan="2" class="text-center">Không có chi tiết học phí.</td>';
-                            detailsBody.appendChild(row);
-                        }
-
-                        // Điền tổng cộng
-                        document.getElementById('modal-total').textContent = `Tổng cộng: ${data.amount} VNĐ`;
-
-                        // Hiển thị modal
                         new bootstrap.Modal(document.getElementById('tuitionDetailModal')).show();
                     })
                     .catch(error => {

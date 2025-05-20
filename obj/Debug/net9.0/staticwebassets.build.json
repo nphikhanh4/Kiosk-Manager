@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uzSDbQjr5iAlHy2aEt+u7l+G2y+E834jqQE0HSbIgRI=",
+  "Hash": "uQpSANx0u6swWeA7JpZsMYQPGrS3UDuOXXFmkIAZZsI=",
   "Source": "KioskManagementWebApp",
   "BasePath": "_content/KioskManagementWebApp",
   "Mode": "Default",
@@ -1485,6 +1485,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\UML\\KioskManagementWebApp\\wwwroot\\img\\QR_code.png",
+      "SourceId": "KioskManagementWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\UML\\KioskManagementWebApp\\wwwroot\\",
+      "BasePath": "_content/KioskManagementWebApp",
+      "RelativePath": "img/QR_code#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qgaqrxhjsh",
+      "Integrity": "hlnbwPeoC7e4B1FykBZn+o4r1Cw4sfaFNT82I4p0A4Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\QR_code.png"
     },
     {
       "Identity": "D:\\UML\\KioskManagementWebApp\\wwwroot\\js\\site.js",
@@ -3664,6 +3685,88 @@
       ]
     },
     {
+      "Route": "img/QR_code.png",
+      "AssetFile": "D:\\UML\\KioskManagementWebApp\\wwwroot\\img\\QR_code.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5275"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hlnbwPeoC7e4B1FykBZn+o4r1Cw4sfaFNT82I4p0A4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 04:15:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hlnbwPeoC7e4B1FykBZn+o4r1Cw4sfaFNT82I4p0A4Q="
+        }
+      ]
+    },
+    {
+      "Route": "img/QR_code.qgaqrxhjsh.png",
+      "AssetFile": "D:\\UML\\KioskManagementWebApp\\wwwroot\\img\\QR_code.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5275"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hlnbwPeoC7e4B1FykBZn+o4r1Cw4sfaFNT82I4p0A4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 14 May 2025 04:15:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qgaqrxhjsh"
+        },
+        {
+          "Name": "label",
+          "Value": "img/QR_code.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hlnbwPeoC7e4B1FykBZn+o4r1Cw4sfaFNT82I4p0A4Q="
+        }
+      ]
+    },
+    {
       "Route": "js/site.js",
       "AssetFile": "D:\\UML\\KioskManagementWebApp\\obj\\Debug\\net9.0\\compressed\\zzpkemu7z1-xtxxf3hu2r.gz",
       "Selectors": [
@@ -3986,7 +4089,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4047,7 +4150,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4092,7 +4195,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4147,7 +4250,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4208,7 +4311,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4253,7 +4356,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4308,7 +4411,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4361,7 +4464,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4398,7 +4501,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4445,7 +4548,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4498,7 +4601,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4535,7 +4638,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 16:52:39 GMT"
+          "Value": "Wed, 14 May 2025 04:17:37 GMT"
         },
         {
           "Name": "Cache-Control",

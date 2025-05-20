@@ -13,18 +13,34 @@
         <h4 class="text-center">Quản lý dịch vụ</h4>
         <hr>
         <ul class="nav flex-column" id="sidebarTabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link @((ViewContext.RouteData.Values["controller"].ToString() == "Kiosk" && ViewContext.RouteData.Values["action"].ToString() == "Index") ? "active" : "")"
-                   id="kiosk-tab" href="/Kiosk/Index" role="tab">
-                    <i class="fas fa-store"></i> Kiosk
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link @((ViewContext.RouteData.Values["controller"].ToString() == "Document" && ViewContext.RouteData.Values["action"].ToString() == "Index") ? "active" : "")"
-                   id="document-tab" href="/Document/Index" role="tab">
-                    <i class="fas fa-book"></i> Tài liệu học tập
-                </a>
-            </li>
+            @{
+                var role = ViewData["Role"] as string;
+                if (!string.IsNullOrEmpty(role))
+                {
+                    if (role == "Admin")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link @((ViewContext.RouteData.Values["controller"].ToString() == "Kiosk" && ViewContext.RouteData.Values["action"].ToString() == "Index") ? "active" : "")"
+                               id="kiosk-tab" href="/Kiosk/Index" role="tab">
+                                <i class="fas fa-store"></i> Kiosk
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @((ViewContext.RouteData.Values["controller"].ToString() == "Document" && ViewContext.RouteData.Values["action"].ToString() == "Index") ? "active" : "")"
+                               id="document-tab" href="/Document/Index" role="tab">
+                                <i class="fas fa-book"></i> Tài liệu học tập
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @((ViewContext.RouteData.Values["controller"].ToString() == "Document" && ViewContext.RouteData.Values["action"].ToString() == "ManageDocuments") ? "active" : "")"
+                               id="manage-documents-tab" href="/Document/ManageDocuments" role="tab">
+                                <i class="fas fa-cogs"></i> Quản lý Tài liệu
+                            </a>
+                        </li>
+                    }
+                }
+            }
+
             <li class="nav-item">
                 <a class="nav-link @((ViewContext.RouteData.Values["controller"].ToString() == "Tuition" && ViewContext.RouteData.Values["action"].ToString() == "Index") ? "active" : "")"
                    id="tuition-tab" href="/Tuition/Index" role="tab">
@@ -32,16 +48,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @((ViewContext.RouteData.Values["controller"].ToString() == "Invoices" && ViewContext.RouteData.Values["action"].ToString() == "Index") ? "active" : "")"
-                   id="invoices-tab" href="/Invoices/Index" role="tab">
-                    <i class="fas fa-file-invoice"></i> Hóa đơn
+                <a class="nav-link @((ViewContext.RouteData.Values["controller"].ToString() == "Tuition" && ViewContext.RouteData.Values["action"].ToString() == "OverdueTuition") ? "active" : "")"
+                   id="overdue-tuition-tab" href="/Tuition/OverdueTuition" role="tab">
+                    <i class="fas fa-exclamation-triangle"></i> Quá hạn học phí
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @((ViewContext.RouteData.Values["controller"].ToString() == "Statistics" && ViewContext.RouteData.Values["action"].ToString() == "Index") ? "active" : "")"
-                   id="statistics-tab" href="/Statistics/Index" role="tab">
-                    <i class="fas fa-chart-bar"></i> Thống kê
-                </a>
+                <a href="@Url.Action("Logout", "Account")" class="btn btn-danger w-100 mb-3">Đăng xuất</a>
             </li>
         </ul>
     </div>

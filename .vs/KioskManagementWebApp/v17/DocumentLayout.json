@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "D:\\UML\\KioskManagementWebApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{88495D16-5BB6-4321-9353-534F5B80D0FF}|KioskManagementWebApp.csproj|d:\\uml\\kioskmanagementwebapp\\views\\tuition\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{88495D16-5BB6-4321-9353-534F5B80D0FF}|KioskManagementWebApp.csproj|solutionrelative:views\\tuition\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{88495D16-5BB6-4321-9353-534F5B80D0FF}|KioskManagementWebApp.csproj|d:\\uml\\kioskmanagementwebapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{88495D16-5BB6-4321-9353-534F5B80D0FF}|KioskManagementWebApp.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{88495D16-5BB6-4321-9353-534F5B80D0FF}|KioskManagementWebApp.csproj|d:\\uml\\kioskmanagementwebapp\\views\\document\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{88495D16-5BB6-4321-9353-534F5B80D0FF}|KioskManagementWebApp.csproj|solutionrelative:views\\document\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -52,26 +48,13 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\UML\\KioskManagementWebApp\\Views\\Tuition\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Tuition\\Index.cshtml",
-              "ToolTip": "D:\\UML\\KioskManagementWebApp\\Views\\Tuition\\Index.cshtml",
-              "RelativeToolTip": "Views\\Tuition\\Index.cshtml",
-              "ViewState": "AgIAAL0AAAAAAAAAAAAgwM0AAABGAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\UML\\KioskManagementWebApp\\Views\\Document\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Document\\Index.cshtml",
+              "ToolTip": "D:\\UML\\KioskManagementWebApp\\Views\\Document\\Index.cshtml",
+              "RelativeToolTip": "Views\\Document\\Index.cshtml",
+              "ViewState": "AgIAANUAAAAAAAAAAAAAAPAAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T16:44:58.478Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\UML\\KioskManagementWebApp\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\UML\\KioskManagementWebApp\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAABkAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-08T14:56:10.963Z",
+              "WhenOpened": "2025-05-20T21:54:31.894Z",
               "EditorCaption": ""
             }
           ]

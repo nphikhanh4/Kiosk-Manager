@@ -1,0 +1,70 @@
+﻿@model List<KioskManagementWebApp.Models.TuitionFee>
+
+@{
+    ViewData["Title"] = "Học phí đã thanh toán";
+}
+
+<style>
+    .logout-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(to right, #dc3545, #b02a37);
+        border: none;
+        padding: 8px 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        color: #ffffff;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        .logout-btn:hover {
+            background: linear-gradient(to right, #b02a37, #8b1e2b);
+            transform: translateY(-2px);
+        }
+
+        .logout-btn:active {
+            transform: translateY(1px);
+        }
+
+    /* Thêm các style khác từ giao diện của bạn */
+</style>
+
+<a href="@Url.Action("Logout", "Account")" class="logout-btn">Đăng xuất</a>
+
+<div class="container">
+    <h2>Học phí đã thanh toán</h2>
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã SV</th>
+                    <th>Họ tên</th>
+                    <th>Khoa</th>
+                    <th>Số tiền</th>
+                    <th>Ngày thanh toán</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Student.StudentId</td>
+                        <td>@item.Student.StudentName</td>
+                        <td>@item.Student.Department</td>
+                        <td>@item.Amount.ToString("N0") VNĐ</td>
+                        <td>@item.PaymentDate?.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info text-center" role="alert">
+            Không có học phí nào đã thanh toán.
+        </div>
+    }
+</div>  

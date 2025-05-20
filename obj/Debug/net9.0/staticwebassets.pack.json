@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\UML\\KioskManagementWebApp\\wwwroot\\img\\QR_code.png",
+      "PackagePath": "staticwebassets\\img\\QR_code.png"
+    },
+    {
       "Id": "D:\\UML\\KioskManagementWebApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
